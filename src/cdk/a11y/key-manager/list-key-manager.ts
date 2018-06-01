@@ -144,15 +144,9 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
 
     /**
      * Sets the active item to the item at the index specified.
-     * @param index The index of the item to be set as active.
+     * @param index The index of the item to be set as active or item The item to be set as active.
      */
-    setActiveItem(index: number): void;
-
-    /**
-     * Sets the active item to the specified item.
-     * @param item The item to be set as active.
-     */
-    setActiveItem(item: T): void;
+    setActiveItem(index: number | T): void;
 
     /**
      * Sets the active item to the item at the index specified.
@@ -290,16 +284,10 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     }
 
     /**
-     * Allows setting the active without any other effects.
-     * @param index Index of the item to be set as active.
-     */
-    updateActiveItem(index: number): void;
-
-    /**
      * Allows setting the active item without any other effects.
-     * @param item Item to be set as active.
+     * @param item Item to be set as active or index Index of the item to be set as active..
      */
-    updateActiveItem(item: T): void;
+    updateActiveItem(item: number | T): void;
 
     updateActiveItem(item: any): void {
         const itemArray = this._getItemsArray();
@@ -363,16 +351,12 @@ export class ListKeyManager<T extends IListKeyManagerOption> {
     private _setActiveItemByIndex(index: number, fallbackDelta: -1 | 1): void {
         const items = this._getItemsArray();
 
-        if (!items[index]) {
-            return;
-        }
+        if (!items[index]) { return; }
 
         while (this._skipPredicateFn(items[index])) {
             index += fallbackDelta;
 
-            if (!items[index]) {
-                return;
-            }
+            if (!items[index]) { return; }
         }
 
         this.setActiveItem(index);
