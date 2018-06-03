@@ -149,7 +149,7 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
         this.selected = !this.selected;
     }
 
-    focus(origin): void {
+    focus(): void {
         console.log('focus');
         this._element.nativeElement.focus();
     }
@@ -187,7 +187,7 @@ export class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocus
         this.listSelection._emitChangeEvent(this);
     }
 
-    _handleFocus($event) {
+    _handleFocus() {
         console.log('_handleFocus');
         if (this.disabled || this._hasFocus) { return; }
 
